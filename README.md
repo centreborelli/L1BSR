@@ -7,4 +7,5 @@ Centre Borelli, ENS Paris-Saclay
 --
 
 [![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/pdf/2304.06871.pdf)
+[![Zenodo](https://img.shields.io/badge/L1BSR-Zenodo-9cf)](https://zenodo.org/record/7826696)
 [![IPOL Demo](https://www.ipol.im/meta/media/logo/IPOL-logo.svg)](https://ipolcore.ipol.im/demo/clientApp/demo.html?id=77777000471)
