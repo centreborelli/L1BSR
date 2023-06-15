@@ -11,7 +11,7 @@ Centre Borelli, ENS Paris-Saclay
 [![IPOL Demo](https://img.shields.io/badge/demo-IPOL-blueviolet)](https://ipolcore.ipol.im/demo/clientApp/demo.html?id=77777000471)
 [![Project](https://img.shields.io/badge/project%20web-github.io-red)](https://centreborelli.github.io/L1BSR/)
 
-This repository is the official PyTorch implementation of L1BSR: Exploiting Detector Overlap for Self-Supervised SISR of Sentinel-2 L1B Imagery (Best Student Paper at EarthVision 2023).
+This repository is the official PyTorch implementation of L1BSR: Exploiting Detector Overlap for Self-Supervised SISR of Sentinel-2 L1B Imagery (**Best Student Paper at EarthVision 2023**).
 
 L1BSR produces a 5m high-resolution (HR) output with all bands correctly registered from a single 10m low-resolution (LR) Sentinel-2 L1B image with misaligned bands. Note that L1BSR is trained on real data with self-supervision, i.e. without any ground truth HR targets.
 
@@ -35,7 +35,7 @@ There are two key modules integral to the training of the L1BSR:
 
 ![](https://github.com/centreborelli/L1BSR/blob/docs/docs/resources/L1BSR_framework.png)
 
-### Testing (without preparing datasets)
+### Testing
 
 For your convenience we provide some test BGRN images (~10Mb) in `/examples`.
 
@@ -46,15 +46,17 @@ We also provide the testing code `main.py`. Like in the demo, you can choose the
 Examples:
 
 ```bash
-# Super-resolution: This code below super-resolves (x2) the image in "examples/00.tif" and saves it in "output.tif".
+# Super-resolution: This code below super-resolves (x2) the image in "examples/00.tif"
+# and saves it in "output.tif".
 python main.py examples/00.tif output.tif --device cuda --task superresolution
-# Cross-spectral registration: This code below aligns the bands Blue, Red, and NIR of the image in "examples/00.tif" to its Green band and saves the output in "output.tif".
+# Cross-spectral registration: This code below aligns the bands Blue, Red, and NIR of
+# the image in "examples/00.tif" to its Green band and saves the output in "output.tif".
 python main.py examples/00.tif output.tif --device cuda --task registration
 ```
 
 ### Training
 
-The training code for both the **CSR** and **REC** modules will be soon available. Stay tuned!
+The training codes for both the **CSR** and **REC** modules will be soon available. Stay tuned!
 
 ### Citation
 
