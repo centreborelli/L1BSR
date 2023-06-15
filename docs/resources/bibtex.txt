@@ -1,0 +1,6 @@
+@inproceedings{Nguyen_2023_L1BSR,
+  title={L1BSR: Exploiting Detector Overlap for Self-Supervised Single-Image Super-Resolution of Sentinel-2 L1B Imagery},
+  author    = {Nguyen, Ngoc Long and Anger, Jeremy and Davy, Axel and Arias, Pablo and Facciolo, Gabriele},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2023}
+}

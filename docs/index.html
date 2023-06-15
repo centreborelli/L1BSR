@@ -1,0 +1,493 @@
+<script src="http://www.google.com/jsapi" type="text/javascript"></script> 
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+
+<style type="text/css">
+	body {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		font-weight:300;
+		font-size:18px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 1100px;
+		background: white;
+	}
+	
+	h1 {
+		font-size:32px;
+		font-weight:300;
+	}
+	
+	.disclaimerbox {
+		background-color: #eee;		
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+		padding: 20px;
+	}
+
+	video.header-vid {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.header-img {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.rounded {
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	a:link,a:visited
+	{
+		color: #1367a7;
+		text-decoration: none;
+	}
+	a:hover {
+		color: #208799;
+	}
+	
+	td.dl-link {
+		height: 160px;
+		text-align: center;
+		font-size: 22px;
+	}
+	
+	.layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+		15px 15px 0 0px #fff, /* The fourth layer */
+		15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+		20px 20px 0 0px #fff, /* The fifth layer */
+		20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+		25px 25px 0 0px #fff, /* The fifth layer */
+		25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+	.paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35); /* The top layer shadow */
+
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+
+	.layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+		margin-top: 5px;
+		margin-left: 10px;
+		margin-right: 30px;
+		margin-bottom: 5px;
+	}
+	
+	.vert-cent {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	hr
+	{
+		border: 0;
+		height: 1px;
+		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	}
+</style>
+
+<html>
+<head>
+	<title>L1BSR: Exploiting Detector Overlap for Self-Supervised Single-Image Super-Resolution of Sentinel-2 L1B Imagery</title>
+	<meta property="og:image" content="resources/L1BSR_teaser.png"/> <!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/ if you update and want to force Facebook to rescrape. -->
+	<meta property="og:title" content="L1BSR: Exploiting Detector Overlap for Self-Supervised Single-Image Super-Resolution of Sentinel-2 L1B Imagery." />
+	<meta property="og:description" content="EarthVision 2023 L1BSR." />
+    <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
+
+	<!-- Get from Google Analytics -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src=""></script> 
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-75863369-6');
+	</script>
+</head>
+
+<body>
+	<br>
+	<center>
+            <span style="font-size:30px">L1BSR: Exploiting Detector Overlap for Self-Supervised</br>Single-Image Super-Resolution of Sentinel-2 L1B Imagery</span>
+		<table align=center width=600px>
+			<table align=center width=600px>
+				<tr>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:20px"><a href="https://ngoclongct.github.io/">Ngoc Long Nguyen</a></span>
+						</center>
+					</td>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:20px"><a href="https://github.com/kidanger/">Jérémy Anger</a></span>
+						</center>
+					</td>
+					<td align=center width=100px>
+						<center>
+                     <span style="font-size:20px"><a href="http://dev.ipol.im/~adavy/">Axel<br>Davy</a></span>
+						</center>
+					</td>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:20px"><a href="http://dev.ipol.im/~pariasm/">Pablo<br>Arias</a></span>
+						</center>
+					</td>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:20px"><a href="http://gfacciol.github.io/">Gabriele Facciolo</a></span>
+						</center>
+					</td>
+				</tr>
+			</table>
+			<table align=center width=250px>
+				<tr>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:20px"><a href='https://arxiv.org/pdf/2304.06871.pdf'>[Paper]</a></span>
+						</center>
+					</td>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:20px"><a href='https://github.com/centreborelli/L1BSR/'>[GitHub]</a></span><br>
+						</center>
+					</td> 
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:20px"><a href='https://ipolcore.ipol.im/demo/clientApp/demo.html?id=77777000471'>[Demo]</a></span><br>
+						</center>
+					</td>                       
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:20px"><a href='https://zenodo.org/record/7826696'>[Dataset]</a></span><br>
+						</center>
+					</td>
+				</tr>
+			</table>
+		</table>
+	</center>
+    <br>
+	<center>
+		<table align=center width=850px>
+			<tr>
+				<td width=260px>
+					<center>
+                  <img class="round" style="width:800px" src="./resources/L1BSR_teaser.png"/>
+					</center>
+				</td>
+			</tr>
+		</table>
+		<table align=center width=850px>
+			<tr>
+				<td>
+                        L1BSR produces a 5m high-resolution (HR) output with all bands correctly registered from a single 10m low-resolution (LR) Sentinel-2 L1B image with misaligned bands. Note that our method is trained on real data with self-supervision, i.e. without any ground truth HR targets.
+				</td>
+			</tr>
+		</table>
+		<table align=center width=850px>
+			<tr>
+				<td>
+                Project developed at the <a href='https://centreborelli.ens-paris-saclay.fr/fr'>ENS Paris-Saclay, Centre Borelli</a> and accepted at <a href='https://www.grss-ieee.org/events/earthvision-2023/'>EarthVision 2023</a>.<br>
+
+				</td>
+			</tr>
+		</table>
+        </center>
+
+	<hr>
+
+	<table align=center width=850px>
+		<center><h1>Abstract</h1></center>
+		<tr>
+			<td>
+                    We propose L1BSR, a deep learning-based method for super-resolution and band alignment of Sentinel-2 L1B RGBN bands. It uses self-supervision on real L1B data to avoid the need for high-resolution ground truth. A cross-spectral registration network is trained to compute an optical flow between different spectral bands. Results show comparable performance to supervised methods on synthetic and real L1B data.
+			</td>
+		</tr>
+	</table>
+	<br>
+
+<!--	<hr>
+	<center><h1>Talk</h1></center>
+	<p align="center">
+		<iframe width="660" height="395" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen align="center"></iframe>
+	</p>
+
+	<table align=center width=800px>
+		<br>
+		<tr>
+			<center>
+				<span style="font-size:28px"><a href=''>[Slides]</a>
+				</span>
+			</center>
+		</tr>
+	</table>
+-->
+	<hr>
+
+        <center><h1>Proposed framework</h1></center>
+
+	<table align=center width=420px>
+		<center>
+			<tr>
+				<td>
+				</td>
+			</tr>
+		</center>
+	</table>
+	<table align=center width=400px>
+		<tr>
+			<td align=center width=400px>
+				<center>
+					<td><img class="round" style="width:550px" src="./resources/L1BSR_framework.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+               <strong>Super-Resolution framework.</strong> Overview of our proposed self-supervised L1BSR framework for Sentinel-2 L1B at training time. Note that at inference time, only one input and the reconstruction module are required. 
+				</td>
+			</tr>
+		</center>
+	</table>
+	<table align=center width=400px>
+		<tr>
+			<td align=center width=400px>
+				<center>
+					<td><img class="round" style="width:550px" src="./resources/CSR_framework.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+               <strong>Cross-Spectral Registration framework.</strong> Training setup of our proposed cross-spectral registration (CSR) module. 
+				</td>
+			</tr>
+		</center>
+	</table>
+    <table align=center width=800px>
+		<br>
+		<tr><center>
+			<span style="font-size:28px">&nbsp;<a href='https://github.com/centreborelli/L1BSR/'>[Try our code]</a> <a href='https://ipolcore.ipol.im/demo/clientApp/demo.html?id=77777000471'>[Try our demo]</a>
+                    </span>
+            </center>
+	</table>
+	<br>
+	<hr>
+
+	<center><h1>Sentinel-2 sensor layout and L1BSR dataset</h1></center>
+
+	<table align=center width=400px>
+		<tr>
+			<td align=center width=400px>
+				<center>
+					<td><img class="round" style="width:550px" src="./resources/S2_sensor_layout.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+               <strong>Sensor layout of the Sentinel-2 MSI.</strong>  The Sentinel-2 MSI carries 12 CMOS detectors for the VNIR bands, with adjacent detectors having overlapping fields of view that result in overlapping regions in level-1B (L1B) images. The push-broom acquisition is done in the vertical direction.
+				</td>
+			</tr>
+		</center>
+	</table>
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+                        The <strong>L1BSR dataset</strong> includes 3740 pairs of overlapping image crops extracted from two L1B products. Each crop has a height of around 400 pixels and a variable width that depends on the overlap width between detectors for RGBN bands, typically around 120-200 pixels. In addition to detector parallax, there is also cross-band parallax for each detector, resulting in shifts between bands. Pre-registration is performed for both cross-band and cross-detector parallax, with a precision of up to a few pixels (typically less than 10 pixels).               
+				</td>
+			</tr>
+		</center>
+	</table>
+<div class="image-container">
+  <div class="image-pair">
+    <img src="resources/1_left.png" class="image1">
+    <img src="resources/1_right.png" class="image2">
+  </div>
+  <div class="image-pair">
+    <img src="resources/2_left.png" class="image1">
+    <img src="resources/2_right.png" class="image2">
+  </div>
+  <div class="image-pair">
+    <img src="resources/4_left.png" class="image1">
+    <img src="resources/4_right.png" class="image2">
+  </div>
+  <div class="image-pair">
+    <img src="resources/5_left.png" class="image1">
+    <img src="resources/5_right.png" class="image2">
+  </div>
+</div>
+
+<style>
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .image-pair {
+    position: relative;
+    width: 176px;
+    height: 176px;
+    margin: 10px;
+    overflow: hidden;
+  }
+  .image1, .image2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+  .image1 {
+    opacity: 1;
+    z-index: 2;
+    animation: show-and-switch 4s infinite;
+  }
+
+  .image2 {
+    z-index: 1;
+    animation: show-and-switch 4s infinite;
+    animation-delay: 2s;
+  }
+  @keyframes show-and-switch {
+    0%, 48% {
+      opacity: 1;
+    }
+    48.01%, 50%, 98% {
+      opacity: 0;
+    }
+    98.01%, 100% {
+      opacity: 1;
+    }
+  }
+</style>
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+                        Examples of overlapping L1B crops from the L1BSR dataset.
+				</td>
+			</tr>
+		</center>
+	</table>
+
+<table align=center width=800px>
+		<br>
+		<tr><center>
+		<span style="font-size:28px">&nbsp;<a href='https://zenodo.org/record/7826696'>[Download link. L1BSR dataset]</a>
+                    </span>
+            </center>
+	</table>
+	<br>
+
+
+	<hr>
+
+	<table align=center width=850px>
+		<center><h1>Qualitative comparison with a supervised SR method</h1></center>
+	</table>
+    		<table align=center width=850px>
+			<tr>
+				<td width=260px>
+					<center>
+                  <img class="round" style="width:550px" src="./resources/L1B_L1C.png"/>
+					</center>
+				</td>
+			</tr>
+		</table>
+   <br>
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+                        We compare our self-supervised method L1BSR with a <a href="https://arxiv.org/abs/2302.11494">L1C-based supervised method</a>, which uses PlanetScope images as ground-truth HR targets to train the SR model. The L1B and L1C images are from the same acquisition.
+				</td>
+			</tr>
+		</center>
+	</table>
+	<br>
+	<hr>
+	<table align=center width=450px>
+		<center><h1>Paper</h1></center>
+		<tr>
+			<td><a href=""><img class="layered-paper-big" style="height:175px" src="./resources/paper.png"/></a></td>
+			<td><span style="font-size:14pt">N. L. Nguyen, J. Anger, A. Davy,  P. Arias, and G. Facciolo<br>
+				<b>L1BSR: Exploiting Detector Overlap for Self-Supervised Single-Image Super-Resolution of Sentinel-2 L1B Imagery.</b><br>
+				In EarthVision 2023.<br>
+				(hosted on <a href="https://arxiv.org/pdf/2304.06871.pdf">ArXiv</a>)<br>
+				<!-- (<a href="./resources/camera-ready.pdf">camera ready</a>)<br> -->
+				<span style="font-size:4pt"><a href=""><br></a>
+				</span>
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<table align=center width=600px>
+		<tr>
+			<td><span style="font-size:14pt"><center>
+				<a href="./resources/bibtex.txt">[Bibtex]</a>
+			</center></td>
+		</tr>
+	</table>
+
+	<hr>
+	<br>
+
+	<table align=center width=900px>
+		<tr>
+			<td width=400px>
+				<left>
+					<center><h1>Acknowledgements</h1></center>
+					This template was originally made by <a href="http://web.mit.edu/phillipi/">Phillip Isola</a> and <a href="http://richzhang.github.io/">Richard Zhang</a> for a <a href="http://richzhang.github.io/colorization/">colorful</a> ECCV project; the code can be found <a href="https://github.com/richzhang/webpage-template">here</a>.
+				</left>
+			</td>
+		</tr>
+	</table>
+
+<br>
+</body>
+</html>
+
