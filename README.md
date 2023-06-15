@@ -31,7 +31,8 @@ There are two key modules integral to the training of the L1BSR:
 
 1. The REConstruction (**REC**) module: performs joint super-resolution and band-alignment for the L1B BGRN data.
 1. The Cross-Spectral Registration (**CSR**) module: produces a dense flow between 2 images of different spectral bands.
-   Both modules are trained with self-supervision. Note that the **CSR** is used only during the training of L1BSR, whereas at inference, only the **REC** is needed.
+
+Both modules are trained with self-supervision. Note that the **CSR** is used only during the training of L1BSR, whereas at inference, only the **REC** is needed.
 
 ![](https://github.com/centreborelli/L1BSR/blob/docs/docs/resources/L1BSR_framework.png)
 
