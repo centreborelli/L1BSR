@@ -9,3 +9,7 @@ Centre Borelli, ENS Paris-Saclay
 [![arXiv](https://img.shields.io/badge/paper-arxiv-brightgreen)](https://arxiv.org/pdf/2304.06871.pdf)
 [![Zenodo](https://img.shields.io/badge/L1BSR%20dataset-Zenodo-9cf)](https://zenodo.org/record/7826696)
 [![IPOL Demo](https://img.shields.io/badge/demo-IPOL-blueviolet)](https://ipolcore.ipol.im/demo/clientApp/demo.html?id=77777000471)
+
+This repository is the official PyTorch implementation of L1BSR: Exploiting Detector Overlap for Self-Supervised SISR of Sentinel-2 L1B Imagery. L1BSR produces a 5m high-resolution (HR) output with all bands correctly registered from a single 10m low-resolution (LR) Sentinel-2 L1B image with misaligned bands. Note that L1BSR is trained on real data with self-supervision, i.e. without any ground truth HR targets.
+
+![](https://github.com/centreborelli/L1BSR/blob/docs/docs/resources/L1BSR_teaser.png)
