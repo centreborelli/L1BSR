@@ -58,7 +58,7 @@ The training code for both the **CSR** and **REC** modules will be soon availabl
 
 ### Citation
 
-```bash
+```
 @inproceedings{nguyen2023l1bsr,
     title={L1BSR: Exploiting Detector Overlap for Self-Supervised Single-Image Super-Resolution of Sentinel-2 L1B Imagery},
     author={Nguyen, Ngoc Long and Anger, J{\'e}r{\'e}my and Davy, Axel and Arias, Pablo and Facciolo, Gabriele},
